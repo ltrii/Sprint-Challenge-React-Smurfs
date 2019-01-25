@@ -4,6 +4,7 @@ import './App.css';
 import SmurfForm from './components/SmurfForm';
 import Smurfs from './components/Smurfs';
 import Nav from './components/Nav';
+import Smurf from './components/Smurf';
 
 import { Route } from 'react-router-dom';
 
@@ -23,6 +24,10 @@ componentDidMount(){
   this.getSmurfs();
 }
 
+componentDidUpdate(){
+  console.log("UPDATE");
+}
+
   getSmurfs() {
     axios
     .get('http://localhost:3333/smurfs')
@@ -36,12 +41,19 @@ componentDidMount(){
     return (
       <div className="App">
       <Nav />
-
+      <h1>Smurf Village</h1>
         <Route exact path={`/`}
             render={props => <Smurfs smurfs={this.state.smurfs} />}
             />
+            
+        <Route path={"/smurf/:id"} render={props =>(
+          <div className="Smurfs"> 
+            <Smurf {...props} smurfs={this.state.smurfs}/>
+          </div>
+          )}/>
+
         <Route path={`/add`}
-            render={props => <SmurfForm />} />
+            render={props => <SmurfForm {...props} />} />
       </div>
     );
   }
