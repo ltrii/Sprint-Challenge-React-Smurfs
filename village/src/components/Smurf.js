@@ -13,31 +13,36 @@ const SmurfDiv = styled.div`
     }
   `;
 
-    
+class Smurf extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {
 
-const Smurf = props => {
+    }
+  }
 
-  const name = (props.name ? props.name : props.smurfs[props.match.params.id].name)
-  const height = (props.height ? props.height : props.smurfs[props.match.params.id].height)
-  const age = (props.age ? props.age : props.smurfs[props.match.params.id].age)
-
-  function deleteSmurf(id) {
+  deleteSmurf = (id) => {
     Axios.delete(`http://localhost:3333/smurfs/${id}`)
-    .then((res) => props.smurfRefresh(res.data))
+    .then((res) => this.props.smurfRefresh(res.data))
     .catch(err => console.log(err.response));
   }
+
+render(){
 
   return (
       <SmurfDiv>
         {/* <Link key={id} to={`/smurf/${id}`}> */}
-        <h3>{name}</h3>
-        <strong>{height} tall</strong>
-        <p>{age} smurf years old</p>
-        <button onClick={deleteSmurf(props.id)}>X</button>
+        <h3>{this.props.name}</h3>
+        <strong>{this.props.height} tall</strong>
+        <p>{this.props.age} smurf years old</p>
+        <button onClick={e => {
+          e.stopPropagation();
+          this.deleteSmurf(this.props.id)}}>X</button>
         {/* </Link> */}
       </SmurfDiv>
   );
 };
+}
 
 Smurf.defaultProps = {
   name: '',

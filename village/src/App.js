@@ -33,6 +33,7 @@ smurfRefresh = (smu) => {
   console.log("refreshing");
 }
 
+
   getSmurfs() {
     axios
     .get('http://localhost:3333/smurfs')
@@ -48,17 +49,17 @@ smurfRefresh = (smu) => {
       <Nav />
       <h1>Smurf Village</h1>
         <Route exact path={`/`}
-            render={props => <Smurfs {...props} smurfRefresh={this.props.smurfRefresh} smurfs={this.state.smurfs} />}
+            render={props => <Smurfs {...props} smurfRefresh={this.smurfRefresh} smurfs={this.state.smurfs} />}
             />
             
         <Route path={"/smurf/:id"} render={props =>(
           <div className="Smurfs"> 
-            <Smurf {...props} smurfRefresh={this.props.smurfRefresh} smurfs={this.state.smurfs}/>
+            <Smurf {...props} smurfRefresh={this.smurfRefresh} smurfs={this.state.smurfs}/>
           </div>
           )}/>
 
         <Route path={`/add`}
-            render={props => <SmurfForm {...props} smurfRefresh={this.props.smurfRefresh} />} />
+            render={props => <SmurfForm {...props} smurfRefresh={this.smurfRefresh} />} />
       </div>
     );
   }
