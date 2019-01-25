@@ -28,13 +28,18 @@ componentDidUpdate(){
   console.log("UPDATE");
 }
 
+smurfRefresh = (smu) => {
+  this.setState({ smurfs: smu })
+  console.log("refreshing");
+}
+
   getSmurfs() {
     axios
     .get('http://localhost:3333/smurfs')
     .then(res => {
       this.setState({ smurfs: res.data })
     })
-    .catch(err => console.log(err));
+    .catch(err => console.log(err.response));
   }
 
   render() {
@@ -43,17 +48,17 @@ componentDidUpdate(){
       <Nav />
       <h1>Smurf Village</h1>
         <Route exact path={`/`}
-            render={props => <Smurfs smurfs={this.state.smurfs} />}
+            render={props => <Smurfs {...props} smurfRefresh={this.props.smurfRefresh} smurfs={this.state.smurfs} />}
             />
             
         <Route path={"/smurf/:id"} render={props =>(
           <div className="Smurfs"> 
-            <Smurf {...props} smurfs={this.state.smurfs}/>
+            <Smurf {...props} smurfRefresh={this.props.smurfRefresh} smurfs={this.state.smurfs}/>
           </div>
           )}/>
 
         <Route path={`/add`}
-            render={props => <SmurfForm {...props} />} />
+            render={props => <SmurfForm {...props} smurfRefresh={this.props.smurfRefresh} />} />
       </div>
     );
   }
