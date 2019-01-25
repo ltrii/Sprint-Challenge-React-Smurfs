@@ -10,6 +10,7 @@ const SmurfHold = styled.div`
     border-radius: 2px;
     width: 80%;
     margin: auto;
+    padding: 20px;
 
   `;
 
@@ -19,7 +20,6 @@ class Smurfs extends Component {
     console.log(this.props.smurfs)
     return (
       <SmurfHold>
-        <ul>
           {this.props.smurfs.map(smurf => {
             return (
               <Smurf
@@ -32,7 +32,6 @@ class Smurfs extends Component {
               />
             );
           })}
-        </ul>
       </SmurfHold>
     );
   }

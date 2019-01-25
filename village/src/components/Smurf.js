@@ -5,13 +5,29 @@ import styled from 'styled-components';
 
 const SmurfDiv = styled.div`
     width: 100%;
-    padding: 0;
+    padding: 5px;
     margin: 0;
 
     &:hover{
-      background-color: rgb(245,245,245);
+      background-color: rgb(250,250,250);
     }
   `;
+
+const NameHold = styled.div`
+
+    `;
+
+const DetailHold = styled.div`
+
+    `;
+
+const SmurfTop = styled.div`
+      display: flex;
+      justify-content: space-between;
+      padding-bottom: 5px;
+      margin-bottom: 15px;
+      border-bottom: 1px solid rgb(245,245,245);
+    `;
 
 class Smurf extends React.Component {
   constructor(props){
@@ -32,9 +48,15 @@ render(){
   return (
       <SmurfDiv>
         {/* <Link key={id} to={`/smurf/${id}`}> */}
-        <h3>{this.props.name}</h3>
-        <strong>{this.props.height} tall</strong>
-        <p>{this.props.age} smurf years old</p>
+        <SmurfTop>
+          <NameHold>
+          	<h3>{this.props.name}</h3>
+          </NameHold>
+          <DetailHold>
+          	<strong>{this.props.height} tall</strong>
+          	<p>{this.props.age} smurf years old</p>
+          </DetailHold>
+        </SmurfTop>
         <button onClick={e => {
           e.stopPropagation();
           this.deleteSmurf(this.props.id)}}>X</button>
